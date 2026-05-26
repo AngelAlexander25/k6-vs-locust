@@ -15,34 +15,46 @@ st.markdown("""
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
     background-color: #F7F5FF;
-    color: #1A1A2E;
+    color: #111111;
 }
 .stApp { background-color: #F7F5FF; }
 
-/* ── TABS ─────────────────────────────────────────────────── */
+/* ── TÍTULOS EN NEGRO ─────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
+.stMarkdown h4, .stMarkdown h5, .stMarkdown h6,
+[data-testid="stMarkdownContainer"] h1,
+[data-testid="stMarkdownContainer"] h2,
+[data-testid="stMarkdownContainer"] h3,
+[data-testid="stMarkdownContainer"] h4,
+[data-testid="stMarkdownContainer"] h5,
+[data-testid="stMarkdownContainer"] h6 {
+    color: #111111 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* ── TABS ─────────────────────────────────────────────────────── */
 .stTabs [data-baseweb="tab-list"] {
     background: #FFFFFF;
     border-bottom: 1px solid #E8E4F8;
     gap: 0;
     border-radius: 12px 12px 0 0;
 }
-
 .stTabs [data-baseweb="tab"] {
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
-    font-weight: 700;
-    color: #111111;
+    font-weight: 600;
+    color: #5A5570;
     padding: 12px 22px;
     border-bottom: 2px solid transparent;
 }
-
 .stTabs [aria-selected="true"] {
-    color: #000000 !important;
+    color: #4A3FB8 !important;
     border-bottom: 2px solid #6B5CE7 !important;
     background: transparent !important;
 }
 
-/* ── KPIs ─────────────────────────────────────────────────── */
+/* ── KPIs ─────────────────────────────────────────────────────── */
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -107,24 +119,18 @@ CORAL   = "#FF6B8A"
 PEACH   = "#FF9F6B"
 SKY     = "#5B9CF6"
 LAVENDER= "#C4B8FF"
-TEXT    = "#1A1A2E"
+TEXT    = "#111111"
 MUTED   = "#4A4560"
 BORDER  = "#EAE6FF"
-# COLORES NUEVOS DE TEXTO
-TEXT    = "#000000"
-MUTED   = "#111111"
-
-BORDER  = "#EAE6FF"
-
 
 BASE = dict(
     paper_bgcolor=BG,
     plot_bgcolor="#FAF8FF",
     font=dict(family="Inter, sans-serif", color=TEXT, size=12),
     xaxis=dict(showgrid=False, zeroline=False,
-               tickfont=dict(size=12, color=MUTED), linecolor=BORDER),
+               tickfont=dict(size=12, color=TEXT), linecolor=BORDER),
     yaxis=dict(gridcolor=BORDER, zeroline=False,
-               tickfont=dict(size=12, color=MUTED), linecolor=BORDER),
+               tickfont=dict(size=12, color=TEXT), linecolor=BORDER),
     margin=dict(l=16, r=16, t=70, b=20),
 )
 
@@ -133,7 +139,7 @@ def callout(texto, color=PURPLE):
     st.markdown(f"""
     <div style="background:#F1ECFF;border-left:4px solid {color};
                 padding:14px 18px;border-radius:0 10px 10px 0;
-                font-size:0.85rem;color:#1A1A2E;line-height:1.7;
+                font-size:0.85rem;color:#111111;line-height:1.7;
                 margin-bottom:20px;box-shadow:0 2px 8px rgba(107,92,231,0.04);">
       {texto}
     </div>
@@ -145,14 +151,13 @@ def card(titulo, cuerpo, color=PURPLE):
     <div style="background:#F3EEFF;border-left:4px solid {color};
                 padding:16px 18px;border-radius:0 10px 10px 0;
                 margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.03);">
-        <div style="font-weight:700;font-size:0.95rem;color:#1A1A2E;margin-bottom:6px;">{titulo}</div>
-        <div style="font-size:0.83rem;color:#2D2A40;line-height:1.7;">{cuerpo}</div>
+        <div style="font-weight:700;font-size:0.95rem;color:#111111;margin-bottom:6px;">{titulo}</div>
+        <div style="font-size:0.83rem;color:#111111;line-height:1.7;">{cuerpo}</div>
     </div>
     """, unsafe_allow_html=True)
 
 
 def tabla_html(df, columnas_centradas=None):
-    """Renderiza un DataFrame como tabla HTML estilizada — sin canvas, sin tema oscuro."""
     if columnas_centradas is None:
         columnas_centradas = []
 
@@ -169,7 +174,7 @@ def tabla_html(df, columnas_centradas=None):
     for h in headers:
         align = "center" if h in columnas_centradas else "left"
         html += (
-            f'<th style="padding:12px 14px;text-align:{align};color:#1A1A2E;'
+            f'<th style="padding:12px 14px;text-align:{align};color:#111111;'
             f'font-weight:700;border-bottom:2px solid #DDD6FA;font-size:0.78rem;'
             f'letter-spacing:0.02em;">{h}</th>'
         )
@@ -182,7 +187,7 @@ def tabla_html(df, columnas_centradas=None):
             cell = row[h]
             align = "center" if h in columnas_centradas else "left"
             valor = str(cell)
-            color_cell = "#1A1A2E"
+            color_cell = "#111111"
             font_weight = "400"
             if valor.strip() in ("Sí", "Si"):
                 color_cell = "#1A8C66"
@@ -255,7 +260,7 @@ st.markdown("""
     Reporte de Rendimiento · Mayo 2026
   </div>
   <div style="font-size:2.6rem;font-weight:700;letter-spacing:-0.02em;
-              line-height:1.15;color:#1A1A2E;">
+              line-height:1.15;color:#111111;">
     ¿Cómo aguanta el sistema<br>cuando llegan muchos usuarios?
     <span style="color:#6B5CE7">.</span>
   </div>
@@ -314,9 +319,9 @@ with tab1:
     with col_desc:
         st.markdown("""
         <div style="background:#FFFFFF;padding:18px;border-radius:12px;
-                    border:1px solid #DDD6FA;font-size:0.85rem;color:#2D2A40;
+                    border:1px solid #DDD6FA;font-size:0.85rem;color:#111111;
                     line-height:1.75;box-shadow:0 2px 8px rgba(107,92,231,0.05);">
-          <b style="color:#1A1A2E;">Cómo leer esta gráfica:</b><br><br>
+          <b style="color:#111111;">Cómo leer esta gráfica:</b><br><br>
           Cada barra muestra qué porcentaje de las peticiones
           enviadas <b>no recibieron respuesta</b>.<br><br>
           La línea naranja es el límite aceptable: <b>máximo 5% de fallos</b>.<br><br>
@@ -381,15 +386,14 @@ with tab1:
             text=[f"{v} ms" for v in max_v], textposition="outside",
             textfont=dict(size=11, color=TEXT),
             cliponaxis=False))
-        # Margen superior muy alto: la leyenda va abajo del título
         fig.update_layout(
             paper_bgcolor=BG,
             plot_bgcolor="#FAF8FF",
             font=dict(family="Inter, sans-serif", color=TEXT, size=12),
             xaxis=dict(showgrid=False, zeroline=False,
-                       tickfont=dict(size=12, color=MUTED), linecolor=BORDER),
+                       tickfont=dict(size=12, color=TEXT), linecolor=BORDER),
             yaxis=dict(gridcolor=BORDER, zeroline=False,
-                       tickfont=dict(size=12, color=MUTED), linecolor=BORDER,
+                       tickfont=dict(size=12, color=TEXT), linecolor=BORDER,
                        range=[0, max(max_v) * 1.30]),
             margin=dict(l=16, r=16, t=120, b=20),
             barmode="group", height=400,
@@ -487,7 +491,7 @@ with tab2:
     <div style="background:#F1ECFF;padding:14px 18px;border-radius:10px;
                 border:1px solid #DDD6FA;font-size:0.85rem;color:#111111;
                 line-height:1.7;margin-bottom:16px;">
-      <b style="color:#1A1A2E;">Cómo leer esta gráfica:</b>
+      <b style="color:#111111;">Cómo leer esta gráfica:</b>
       El <b>tiempo p95</b> significa que <b>95 de cada 100 usuarios</b> recibieron
       su respuesta en ese tiempo o menos. La línea roja es nuestro límite:
       <b>máximo 1 segundo (1,000 ms)</b>. Las barras rojas/naranjas están fuera del límite.
@@ -586,7 +590,7 @@ with tab2:
         ))
         fig_rps.update_layout(**BASE, height=340,
                               xaxis_title="Número de usuarios simultáneos",
-                                  yaxis_range=[0, max(k6_rps) * 1.30],
+                              yaxis_range=[0, max(k6_rps) * 1.30],
                               yaxis_title="Peticiones por segundo",
                               showlegend=False)
         st.plotly_chart(fig_rps, use_container_width=True)
@@ -715,7 +719,7 @@ with tab3:
             ["Todo bien", "Falla de conexiones", "Falla de conexiones", "Colapso"],
         ],
         texttemplate="%{text}",
-        textfont=dict(family="Inter", size=13, color="#1A1A2E"),
+        textfont=dict(family="Inter", size=13, color="#111111"),
         colorscale=[[0, "#E8FAF3"], [0.5, "#FFF4E6"], [1, "#FFE8EE"]],
         showscale=False, xgap=6, ygap=6,
     ))
@@ -724,8 +728,8 @@ with tab3:
         font=dict(family="Inter", color=TEXT),
         height=220,
         margin=dict(l=80, r=16, t=16, b=40),
-        xaxis=dict(tickfont=dict(size=12, color=MUTED)),
-        yaxis=dict(tickfont=dict(size=12, color=MUTED)),
+        xaxis=dict(tickfont=dict(size=12, color=TEXT)),
+        yaxis=dict(tickfont=dict(size=12, color=TEXT)),
     )
     st.plotly_chart(fig_heat, use_container_width=True)
 
@@ -751,7 +755,7 @@ with tab4:
     <div style="background:#F1ECFF;padding:14px 18px;border-radius:10px;
                 border:1px solid #DDD6FA;font-size:0.85rem;color:#111111;
                 line-height:1.7;margin-bottom:16px;">
-      <b style="color:#1A1A2E;">Cómo leer esta gráfica:</b>
+      <b style="color:#111111;">Cómo leer esta gráfica:</b>
       La línea roja es cómo está el sistema hoy (local).
       La línea naranja es la estimación siendo conservadores (asumiendo menos mejora).
       La línea verde es la estimación siendo optimistas (asumiendo que todo mejora bien).
@@ -917,17 +921,17 @@ with tab6:
         <div style="background:#FFFFFF;border:1px solid #DDD6FA;border-radius:12px;
                     border-top:3px solid #5B9CF6;
                     padding:20px;box-shadow:0 2px 8px rgba(91,156,246,0.08);margin-bottom:16px;">
-          <div style="font-size:1.1rem;font-weight:700;color:#1A1A2E;margin-bottom:12px;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111111;margin-bottom:12px;">
             k6 — para medir velocidad pura
           </div>
           <div style="font-size:0.85rem;color:#111111;line-height:1.75;">
-            <b style="color:#1A1A2E;">Úsalo cuando quieras saber</b> qué tan rápido
+            <b style="color:#111111;">Úsalo cuando quieras saber</b> qué tan rápido
             responden tus endpoints bajo carga sostenida, sin que el login sea parte del problema.<br><br>
-            <b style="color:#1A1A2E;">Ideal para</b> pruebas de estrés graduales,
+            <b style="color:#111111;">Ideal para</b> pruebas de estrés graduales,
             encontrar el punto de quiebre de latencia, monitoreo continuo de rendimiento.<br><br>
-            <b style="color:#1A1A2E;">Ventajas:</b> muy rápido de configurar, resultados
+            <b style="color:#111111;">Ventajas:</b> muy rápido de configurar, resultados
             claros, excelente para automatizar en pipelines de CI/CD, gratuito y de código abierto.<br><br>
-            <b style="color:#1A1A2E;">Limitación:</b> no simula el flujo real del usuario —
+            <b style="color:#111111;">Limitación:</b> no simula el flujo real del usuario —
             si el login falla bajo carga, k6 no lo va a detectar porque hace login solo una vez.
           </div>
         </div>
@@ -938,17 +942,17 @@ with tab6:
         <div style="background:#FFFFFF;border:1px solid #DDD6FA;border-radius:12px;
                     border-top:3px solid #FF6B8A;
                     padding:20px;box-shadow:0 2px 8px rgba(255,107,138,0.08);margin-bottom:16px;">
-          <div style="font-size:1.1rem;font-weight:700;color:#1A1A2E;margin-bottom:12px;">
+          <div style="font-size:1.1rem;font-weight:700;color:#111111;margin-bottom:12px;">
             Locust — para simular usuarios reales
           </div>
-          <div style="font-size:0.85rem;color:#2D2A40;line-height:1.75;">
-            <b style="color:#1A1A2E;">Úsalo cuando quieras saber</b> cómo se comporta
+          <div style="font-size:0.85rem;color:#111111;line-height:1.75;">
+            <b style="color:#111111;">Úsalo cuando quieras saber</b> cómo se comporta
             el sistema cuando muchos usuarios nuevos llegan al mismo tiempo — login incluido.<br><br>
-            <b style="color:#1A1A2E;">Ideal para</b> detectar problemas de autenticación
+            <b style="color:#111111;">Ideal para</b> detectar problemas de autenticación
             bajo carga, simular flujos completos de usuario, pruebas de escenarios reales.<br><br>
-            <b style="color:#1A1A2E;">Ventajas:</b> se escribe en Python (más accesible),
+            <b style="color:#111111;">Ventajas:</b> se escribe en Python (más accesible),
             interfaz visual en tiempo real, fácil de adaptar a flujos complejos.<br><br>
-            <b style="color:#1A1A2E;">Limitación:</b> si el login falla, todo lo demás
+            <b style="color:#111111;">Limitación:</b> si el login falla, todo lo demás
             también falla — a veces es difícil saber si el problema es el login o el endpoint.
           </div>
         </div>
@@ -958,7 +962,7 @@ with tab6:
     st.markdown("""
     <div style="background:linear-gradient(135deg, #EAE6FF 0%, #E8F4FF 100%);
                 border-radius:12px;padding:22px 24px;
-                font-size:0.88rem;color:#1A1A2E;line-height:1.75;margin-bottom:20px;">
+                font-size:0.88rem;color:#111111;line-height:1.75;margin-bottom:20px;">
       <b style="font-size:1rem;">Para este proyecto específico, recomiendo usar ambas — como lo hicimos.</b><br><br>
       <b>k6 primero:</b> para encontrar cuántos usuarios aguanta el sistema antes de volverse lento.
       Es más fácil de interpretar y te da una línea base clara.<br><br>
@@ -1006,7 +1010,7 @@ with tab6:
     tabla_html(df_tools)
 
     st.markdown("""
-    <div style="font-size:0.7rem;color:#111111;text-align:center;
+    <div style="font-size:0.7rem;color:#5A5570;text-align:center;
                 margin-top:40px;letter-spacing:0.08em;">
       REPORTE DE RENDIMIENTO · MAYO 2026 · ENTORNO LOCAL · MODO DESARROLLO
     </div>
