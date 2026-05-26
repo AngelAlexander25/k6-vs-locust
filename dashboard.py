@@ -26,16 +26,18 @@ html, body, [class*="css"] {
     gap: 0;
     border-radius: 12px 12px 0 0;
 }
+
 .stTabs [data-baseweb="tab"] {
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
-    font-weight: 600;
-    color: #5A5570;
+    font-weight: 700;
+    color: #111111;
     padding: 12px 22px;
     border-bottom: 2px solid transparent;
 }
+
 .stTabs [aria-selected="true"] {
-    color: #4A3FB8 !important;
+    color: #000000 !important;
     border-bottom: 2px solid #6B5CE7 !important;
     background: transparent !important;
 }
@@ -108,6 +110,12 @@ LAVENDER= "#C4B8FF"
 TEXT    = "#1A1A2E"
 MUTED   = "#4A4560"
 BORDER  = "#EAE6FF"
+# COLORES NUEVOS DE TEXTO
+TEXT    = "#000000"
+MUTED   = "#111111"
+
+BORDER  = "#EAE6FF"
+
 
 BASE = dict(
     paper_bgcolor=BG,
@@ -251,7 +259,7 @@ st.markdown("""
     ¿Cómo aguanta el sistema<br>cuando llegan muchos usuarios?
     <span style="color:#6B5CE7">.</span>
   </div>
-  <div style="font-size:0.9rem;color:#2D2A40;margin-top:14px;line-height:1.6;max-width:620px;">
+  <div style="font-size:0.9rem;color:#111111;margin-top:14px;line-height:1.6;max-width:620px;">
     Corrimos pruebas con distintas cantidades de usuarios al mismo tiempo para ver
     en qué punto el sistema local empieza a fallar o a responder lento.
     Estas son las herramientas que usamos y lo que encontramos.
@@ -477,7 +485,7 @@ with tab2:
     st.markdown("#### ¿Qué tan rápido respondió el sistema local en cada prueba?")
     st.markdown("""
     <div style="background:#F1ECFF;padding:14px 18px;border-radius:10px;
-                border:1px solid #DDD6FA;font-size:0.85rem;color:#2D2A40;
+                border:1px solid #DDD6FA;font-size:0.85rem;color:#111111;
                 line-height:1.7;margin-bottom:16px;">
       <b style="color:#1A1A2E;">Cómo leer esta gráfica:</b>
       El <b>tiempo p95</b> significa que <b>95 de cada 100 usuarios</b> recibieron
@@ -741,7 +749,7 @@ with tab4:
     st.markdown("#### Proyección: tiempo de respuesta local vs servidor")
     st.markdown("""
     <div style="background:#F1ECFF;padding:14px 18px;border-radius:10px;
-                border:1px solid #DDD6FA;font-size:0.85rem;color:#2D2A40;
+                border:1px solid #DDD6FA;font-size:0.85rem;color:#111111;
                 line-height:1.7;margin-bottom:16px;">
       <b style="color:#1A1A2E;">Cómo leer esta gráfica:</b>
       La línea roja es cómo está el sistema hoy (local).
@@ -912,7 +920,7 @@ with tab6:
           <div style="font-size:1.1rem;font-weight:700;color:#1A1A2E;margin-bottom:12px;">
             k6 — para medir velocidad pura
           </div>
-          <div style="font-size:0.85rem;color:#2D2A40;line-height:1.75;">
+          <div style="font-size:0.85rem;color:#111111;line-height:1.75;">
             <b style="color:#1A1A2E;">Úsalo cuando quieras saber</b> qué tan rápido
             responden tus endpoints bajo carga sostenida, sin que el login sea parte del problema.<br><br>
             <b style="color:#1A1A2E;">Ideal para</b> pruebas de estrés graduales,
@@ -998,7 +1006,7 @@ with tab6:
     tabla_html(df_tools)
 
     st.markdown("""
-    <div style="font-size:0.7rem;color:#5A5570;text-align:center;
+    <div style="font-size:0.7rem;color:#111111;text-align:center;
                 margin-top:40px;letter-spacing:0.08em;">
       REPORTE DE RENDIMIENTO · MAYO 2026 · ENTORNO LOCAL · MODO DESARROLLO
     </div>
